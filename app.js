@@ -4,9 +4,9 @@ const roles = {
     kicker: "RUTA DE APRENDIZAJE · DOCENCIA",
     intro: "Herramientas para registrar el progreso de tus estudiantes y acompañar sus trayectorias escolares.",
     modules: [
-      ["Navegación y registro", "Conocé el recorrido de consulta de cursos y espacios curriculares. Identificá dónde se encuentra la información necesaria antes de iniciar una carga.", "Revisá que estés trabajando con el curso y el espacio curricular correctos. Consultá las pautas institucionales antes de registrar información.", { file: "public/309-Registrar-Calificaciones-2.pdf", label: "Instructivo: Registrar calificaciones" }],
+      ["Navegación y registro", "Conocé el recorrido de consulta de cursos y espacios curriculares. Identificá dónde se encuentra la información necesaria antes de iniciar una carga.", "Revisá que estés trabajando con el curso y el espacio curricular correctos. Consultá las pautas institucionales antes de registrar información.", "calificaciones"],
       ["Casos especiales", "Repasá situaciones que requieren atención, como Materias Previas, DAA y el seguimiento de trayectorias con información pendiente.", "Verificá los antecedentes y consultá al equipo institucional ante dudas. No des por cerrada una trayectoria sin corroborar los criterios vigentes."],
-      ["Edición y cierre", "Practicá la revisión de una calificación antes del cierre y conocé qué tener en cuenta si necesitás solicitar una corrección posterior.", "Antes de confirmar, revisá estudiante, período y valor. Si el período está cerrado o la edición no está habilitada, seguí el circuito institucional de consulta.", { file: "public/303-Finalizar IPE.pdf", label: "Instructivo: Finalizar IPE" }]
+      ["Edición y cierre", "Practicá la revisión de una calificación antes del cierre y conocé qué tener en cuenta si necesitás solicitar una corrección posterior.", "Antes de confirmar, revisá estudiante, período y valor. Si el período está cerrado o la edición no está habilitada, seguí el circuito institucional de consulta.", "ipe"]
     ],
     simulator: {
       title: "Carga y revisión de calificación",
@@ -29,7 +29,7 @@ const roles = {
     kicker: "RUTA DE APRENDIZAJE · ACOMPAÑAMIENTO",
     intro: "Recorré conceptos para registrar la asistencia, atender situaciones complejas y acompañar a cada estudiante.",
     modules: [
-      ["Registro diario", "Organizá la consulta del curso y el registro de asistencia del día. Reconocé por qué es importante verificar fecha, división y nómina.", "Antes de iniciar, confirmá el curso, la división y la fecha seleccionada. Seguí el procedimiento definido por tu institución para completar el registro.", { file: "public/018-Gestionar-Asistencias.pdf", label: "Instructivo: Gestionar asistencias" }],
+      ["Registro diario", "Organizá la consulta del curso y el registro de asistencia del día. Reconocé por qué es importante verificar fecha, división y nómina.", "Antes de iniciar, confirmá el curso, la división y la fecha seleccionada. Seguí el procedimiento definido por tu institución para completar el registro.", "asistencias"],
       ["Inasistencias y justificaciones", "Considerá cómo dar seguimiento a inasistencias combinadas y documentación presentada fuera de término, sin perder de vista la trayectoria del estudiante.", "Registrá la información según los criterios institucionales. Si una justificación tardía modifica un dato ya consolidado, consultá el circuito de corrección."],
       ["Monitoreo de trayectorias", "Usá la información disponible para identificar alertas de asistencia y conversar con los equipos responsables del acompañamiento.", "Un indicador requiere contexto: contrastá la información y articulá con los referentes escolares antes de tomar decisiones sobre la trayectoria."]
     ],
@@ -156,6 +156,51 @@ function escapeHTML(value) {
   })[character]);
 }
 
+const documents = {
+  calificaciones: { title: "Registrar calificaciones", file: "public/309-Registrar-Calificaciones-2.pdf" },
+  ipe: { title: "Finalizar IPE", file: "public/303-Finalizar IPE.pdf" },
+  asistencias: { title: "Gestionar asistencias", file: "public/018-Gestionar-Asistencias.pdf" }
+};
+
+function renderDocCard(key) {
+  const doc = documents[key];
+  if (!doc) return "";
+  const href = encodeURI(doc.file);
+  return `<div class="doc-card">
+    <span class="doc-icon" aria-hidden="true"><svg viewBox="0 0 32 40"><path d="M3 1h18l8 8v28a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z" fill="#fff" stroke="#d7dcd4" stroke-width="1.5"/><path d="M21 1v6a2 2 0 0 0 2 2h6" fill="none" stroke="#d7dcd4" stroke-width="1.5"/><rect x="0" y="22" width="22" height="11" rx="2" fill="#c8483b"/><text x="11" y="30.5" text-anchor="middle" font-size="7.5" font-weight="700" fill="#fff" font-family="Arial, sans-serif">PDF</text></svg></span>
+    <span class="doc-info"><span class="doc-kicker">INSTRUCTIVO</span><strong>${escapeHTML(doc.title)}</strong><small>${escapeHTML(doc.file.split("/").pop())}</small></span>
+    <span class="doc-actions"><button type="button" class="doc-button" data-doc-preview="${key}">Vista previa</button><a class="doc-button doc-button-primary" href="${href}" download>Descargar ↓</a></span>
+  </div>`;
+}
+
+function openDocViewer(key) {
+  const doc = documents[key];
+  const viewer = document.querySelector("#doc-viewer");
+  document.querySelector("#doc-viewer-title").textContent = doc.title;
+  document.querySelector("#doc-viewer-download").href = encodeURI(doc.file);
+  document.querySelector("#doc-viewer-frame").src = encodeURI(doc.file);
+  viewer.showModal();
+}
+
+function closeDocViewer() {
+  document.querySelector("#doc-viewer").close();
+}
+
+document.querySelectorAll("[data-docs]").forEach((list) => {
+  list.innerHTML = list.dataset.docs.split(" ").map(renderDocCard).join("");
+});
+document.addEventListener("click", (event) => {
+  const trigger = event.target.closest("[data-doc-preview]");
+  if (trigger) openDocViewer(trigger.dataset.docPreview);
+});
+document.querySelector("#doc-viewer-close").addEventListener("click", closeDocViewer);
+document.querySelector("#doc-viewer").addEventListener("click", (event) => {
+  if (event.target.id === "doc-viewer") closeDocViewer();
+});
+document.querySelector("#doc-viewer").addEventListener("close", () => {
+  document.querySelector("#doc-viewer-frame").src = "about:blank";
+});
+
 function renderHomeProgress() {
   const container = document.querySelector("#home-progress-list");
   container.innerHTML = Object.entries(roles).map(([key, role]) => {
@@ -189,7 +234,7 @@ function renderRole(roleKey) {
       <div class="module-top"><span class="module-index">0${index + 1}</span><span class="module-tag">MÓDULO ${index + 1}</span></div>
       <h3>${module[0]}</h3><p>${module[1]}</p>
       <details><summary>Ver recomendación</summary><p>${module[2]}</p></details>
-      ${module[3] ? `<a class="module-download" href="${encodeURI(module[3].file)}" download>${module[3].label} <span aria-hidden="true">PDF ↓</span></a>` : ""}
+      ${module[3] ? renderDocCard(module[3]) : ""}
       <label class="module-complete"><input type="checkbox" data-module-complete="${index}" ${portalState.completed[roleKey][index] ? "checked" : ""}><span>Marcar como completado</span></label>
     </article>`).join("");
   renderRoleProgress(roleKey);
