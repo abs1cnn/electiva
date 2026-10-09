@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#153d35">
+    <meta name="description" content="Portal de capacitación para acompañar el uso de la Libreta Digital SGE en Córdoba.">
+    <title>SGE · Libreta Digital | Portal de capacitación</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Ir al contenido principal</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#inicio" aria-label="SGE Libreta Digital, ir al inicio">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span class="brand-copy"><strong>SGE</strong><small>Libreta Digital</small></span>
+        </a>
+        <nav class="main-nav" aria-label="Navegación principal">
+          <a href="#inicio" data-nav="inicio">Inicio</a>
+          <a href="#recursos" data-nav="recursos">Recursos</a>
+          <a href="#ayuda" data-nav="ayuda">Preguntas frecuentes</a>
+        </nav>
+        <a class="header-help" href="#ayuda"><span aria-hidden="true">?</span> Mesa de ayuda</a>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section id="inicio" class="view home-view">
+        <div class="hero-wrap">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="eyebrow-dot"></span> ACOMPAÑAMIENTO PARA LA COMUNIDAD EDUCATIVA</div>
+            <h1>La escuela,<br>más <span>conectada.</span></h1>
+            <p class="hero-lede">Todo lo que necesitás para trabajar con la Libreta Digital SGE, en un solo lugar y a tu ritmo.</p>
+            <a href="#rutas" class="button button-light">Explorar capacitaciones <span aria-hidden="true">↘</span></a>
+            <div class="hero-note"><span class="note-line"></span> Guías prácticas para cada rol en tu escuela</div>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+            <div class="art-card art-card-back"><span class="art-mini-label">SEGUIMIENTO ESCOLAR</span><div class="art-bars"><i></i><i></i><i></i><i></i><i></i></div><div class="art-foot"><span>Asistencia</span><b>94%</b></div></div>
+            <div class="art-card art-card-front"><div class="art-topline"><span class="art-dot"></span><span>INFORME DE PROGRESO</span><span class="art-more">···</span></div><div class="art-student"><span class="avatar">LM</span><span><b>Lucía Martínez</b><small>3.º año · División A</small></span><span class="status-pill">Al día</span></div><div class="art-progress"><span></span></div><div class="art-labels"><span>Trayectoria escolar</span><b>Buen progreso</b></div></div>
+            <div class="art-orbit orbit-three"></div><span class="art-spark spark-one">✳</span><span class="art-spark spark-two">✦</span>
+          </div>
+        </div>
+
+        <section id="rutas" class="path-section section-shell">
+          <div class="section-heading">
+            <div><span class="section-kicker">TU RECORRIDO EMPIEZA ACÁ</span><h2>Elegí tu ruta de aprendizaje</h2></div>
+            <span class="heading-aside">Contenido pensado para las tareas<br>de cada rol en la escuela.</span>
+          </div>
+          <div class="role-grid">
+            <a href="#profesor" class="role-card role-profesor" data-role="profesor">
+              <span class="role-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5v-16Z"/><path d="M4 5.5v14A2.5 2.5 0 0 1 6.5 17H20M8 7h8M8 10h6"/></svg></span>
+              <span class="role-number">01 / DOCENCIA</span><h3>Profesor/a</h3><p>Registrá el progreso, las calificaciones y las trayectorias de tus estudiantes.</p><span class="role-link">Ver ruta <b aria-hidden="true">↗</b></span>
+            </a>
+            <a href="#preceptor" class="role-card role-preceptor" data-role="preceptor">
+              <span class="role-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M8 3v4m8-4v4M4 10h16m-11 4h2m3 0h2m-7 3h2"/></svg></span>
+              <span class="role-number">02 / ACOMPAÑAMIENTO</span><h3>Preceptor/a</h3><p>Llevá el registro diario y acompañá la asistencia de cada estudiante.</p><span class="role-link">Ver ruta <b aria-hidden="true">↗</b></span>
+            </a>
+            <a href="#directivo" class="role-card role-directivo" data-role="directivo">
+              <span class="role-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-7h6v7M9 9h.01M15 9h.01"/></svg></span>
+              <span class="role-number">03 / GESTIÓN INSTITUCIONAL</span><h3>Directivo/a</h3><p>Consultá el tablero, gestioná accesos y acompañá los procesos escolares.</p><span class="role-link">Ver ruta <b aria-hidden="true">↗</b></span>
+            </a>
+          </div>
+          <section class="learning-progress" aria-labelledby="learning-progress-title">
+            <div class="progress-copy"><span class="section-kicker">TU CAPACITACIÓN</span><h2 id="learning-progress-title">Tu avance, a tu ritmo</h2><p>El progreso queda guardado en este navegador.</p></div>
+            <div id="home-progress-list" class="home-progress-list"></div>
+          </section>
+        </section>
+
+        <section class="search-band" aria-labelledby="search-title">
+          <div class="search-inner">
+            <div><span class="section-kicker">¿QUÉ ESTÁS BUSCANDO?</span><h2 id="search-title">Encontrá una respuesta rápido.</h2><p>Buscá un tema, una tarea o una palabra clave.</p></div>
+            <div class="search-control">
+              <label class="sr-only" for="site-search">Buscar en el portal</label>
+              <span class="search-icon" aria-hidden="true">⌕</span>
+              <input id="site-search" type="search" placeholder="Ej.: Materias Previas, asistencia..." autocomplete="off">
+              <button id="search-button" type="button" aria-label="Buscar">Buscar <span aria-hidden="true">→</span></button>
+              <div id="search-results" class="search-results" role="status" aria-live="polite" hidden></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="news-section section-shell">
+          <div class="section-heading news-heading"><div><span class="section-kicker">PARA TENER EN CUENTA</span><h2>Novedades del portal</h2></div><span class="news-label"><span></span> INFORMACIÓN</span></div>
+          <article class="news-card"><div class="news-date"><span>ACTUALIZACIÓN</span><b>SGE</b></div><div class="news-body"><h3>Un espacio para aprender paso a paso</h3><p>Explorá los recorridos y practicá con los simuladores de ejemplo. Este material es orientativo: consultá los procedimientos vigentes de tu institución ante cualquier diferencia.</p></div><a href="#recursos" class="news-arrow" aria-label="Ir a recursos">↗</a></article>
+        </section>
+      </section>
+
+      <section id="role-view" class="view role-view" hidden>
+        <div class="role-banner"><div class="section-shell role-banner-inner"><a href="#inicio" class="back-link">← Volver al inicio</a><span id="role-banner-kicker" class="section-kicker"></span><h1 id="role-title"></h1><p id="role-intro"></p></div></div>
+        <div class="section-shell role-content">
+          <div class="module-heading"><div><span class="section-kicker">TU RUTA DE APRENDIZAJE</span><h2>Módulos</h2></div><span class="module-count">3 MÓDULOS</span></div>
+          <div class="role-progress" id="role-progress"></div>
+          <div id="module-list" class="module-list"></div>
+          <section id="workspace-section" class="workspace-section"></section>
+          <section class="simulator-section" id="simulador">
+            <div class="simulator-heading"><div><span class="section-kicker">PRACTICÁ CON UN CASO DE EJEMPLO</span><h2 id="simulator-title">Simulador</h2><p id="simulator-description"></p></div><span class="simulator-badge"><span></span> ENTORNO DE PRÁCTICA</span></div>
+            <div id="simulator-content" class="simulator-card"></div>
+            <p class="simulator-disclaimer">Este simulador es ilustrativo y no se conecta al sistema SGE. Los registros creados en las áreas de práctica se guardan solo en este navegador y no representan información real.</p>
+          </section>
+        </div>
+      </section>
+
+      <section id="recursos" class="view content-view section-shell" hidden>
+        <div class="content-intro"><a href="#inicio" class="back-link">← Volver al inicio</a><span class="section-kicker">MATERIAL DE CONSULTA</span><h1>Centro de recursos</h1><p>Microguías y recursos de referencia para acompañar las tareas habituales en la Libreta Digital.</p></div>
+        <div class="resource-grid">
+          <article class="resource-card"><span class="resource-number">01</span><span class="resource-icon">↗</span><span class="section-kicker">PROFESORADO</span><h2>Registro de calificaciones</h2><p>Repasá la secuencia de carga, revisión y cierre de calificaciones en el recorrido para Profesor/a.</p><a href="#profesor#modulo-1" data-resource-role="profesor">Abrir microguía <span>→</span></a><div class="resource-downloads"><a href="public/309-Registrar-Calificaciones-2.pdf" download>Registrar calificaciones · PDF ↓</a><a href="public/303-Finalizar%20IPE.pdf" download>Finalizar IPE · PDF ↓</a></div></article>
+          <article class="resource-card"><span class="resource-number">02</span><span class="resource-icon">◷</span><span class="section-kicker">PRECEPTORÍA</span><h2>Asistencia y justificaciones</h2><p>Consultá conceptos clave para el registro diario y el seguimiento de inasistencias.</p><a href="#preceptor#modulo-1" data-resource-role="preceptor">Abrir microguía <span>→</span></a><div class="resource-downloads"><a href="public/018-Gestionar-Asistencias.pdf" download>Gestionar asistencias · PDF ↓</a></div></article>
+          <article class="resource-card"><span class="resource-number">03</span><span class="resource-icon">▦</span><span class="section-kicker">EQUIPO DIRECTIVO</span><h2>Tablero institucional</h2><p>Conocé los temas del tablero de control, la gestión de accesos y el seguimiento de actas.</p><a href="#directivo#modulo-1" data-resource-role="directivo">Abrir microguía <span>→</span></a></article>
+          <article class="resource-card resource-note"><span class="resource-icon">i</span><span class="section-kicker">IMPORTANTE</span><h2>Material oficial</h2><p>Los manuales, instructivos y videos oficiales deben consultarse en los canales institucionales vigentes. Este portal no aloja documentación oficial ni reemplaza las indicaciones del equipo SGE.</p><a href="#ayuda">Ver opciones de soporte <span>→</span></a></article>
+        </div>
+        <section class="quick-tips"><span class="section-kicker">ANTES DE EMPEZAR</span><h2>Tres ideas para aprovechar el recorrido</h2><div class="tips-grid"><p><b>01</b> Elegí el rol que corresponde a tus tareas.</p><p><b>02</b> Avanzá por los módulos en orden y revisá los conceptos.</p><p><b>03</b> Usá el simulador para practicar con datos ficticios.</p></div></section>
+      </section>
+
+      <section id="ayuda" class="view content-view help-view section-shell" hidden>
+        <div class="content-intro"><a href="#inicio" class="back-link">← Volver al inicio</a><span class="section-kicker">ESTAMOS PARA ACOMPAÑARTE</span><h1>Preguntas frecuentes</h1><p>Respuestas orientativas para comenzar. Si tu consulta depende del acceso o la configuración institucional, contactá a los referentes correspondientes.</p></div>
+        <div id="faq-list" class="faq-list"></div>
+        <section class="support-card"><div class="support-icon">?</div><div><span class="section-kicker">¿NECESITÁS MÁS AYUDA?</span><h2>Contactá a tu referente institucional</h2><p>Para inconvenientes de acceso o consultas sobre el uso real del sistema, recurrí al referente SGE de tu institución o a los canales oficiales de soporte de la autoridad educativa.</p></div><a href="#inicio" class="button button-dark">Volver al portal <span>→</span></a></section>
+      </section>
+    </main>
+    <div id="site-notice" class="site-notice" role="status" aria-live="polite" hidden></div>
+    <footer class="site-footer"><div class="section-shell footer-inner"><a class="brand footer-brand" href="#inicio"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span class="brand-copy"><strong>SGE</strong><small>Libreta Digital</small></span></a><p>Un espacio de acompañamiento para la comunidad educativa.</p><span class="footer-disclaimer">Material orientativo · Córdoba</span></div></footer>
+  </body>
+</html>
