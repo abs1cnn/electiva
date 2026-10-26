@@ -11,6 +11,24 @@
   </head>
   <body>
     <a class="skip-link" href="#main-content">Ir al contenido principal</a>
+    <section class="accessibility-bar" aria-label="Herramientas de accesibilidad">
+      <div class="accessibility-inner">
+        <div class="text-size-controls" role="group" aria-label="Tamaño del texto">
+          <span class="accessibility-label">Tamaño del texto</span>
+          <button type="button" class="accessibility-button text-size-button" id="text-smaller" aria-label="Reducir tamaño del texto">A−</button>
+          <button type="button" class="accessibility-button text-size-button" id="text-larger" aria-label="Aumentar tamaño del texto">A+</button>
+          <button type="button" class="accessibility-button" id="text-reset">Restablecer</button>
+          <span id="text-size-value" class="accessibility-status" aria-live="polite">100%</span>
+        </div>
+        <div class="narration-controls" role="group" aria-label="Narración del contenido">
+          <button type="button" class="accessibility-button" id="narration-start" aria-label="Leer el contenido de esta página">▶ Leer página</button>
+          <button type="button" class="accessibility-button" id="narration-pause" aria-label="Pausar la narración" disabled>Pausar</button>
+          <button type="button" class="accessibility-button" id="narration-resume" aria-label="Reanudar la narración" disabled>Continuar</button>
+          <button type="button" class="accessibility-button" id="narration-stop" aria-label="Detener la narración" disabled>Detener</button>
+        </div>
+        <span id="narration-status" class="accessibility-status" role="status" aria-live="polite"></span>
+      </div>
+    </section>
     <header class="site-header">
       <div class="header-inner">
         <a class="brand" href="#inicio" aria-label="SGE Libreta Digital, ir al inicio">
@@ -19,6 +37,8 @@
         </a>
         <nav class="main-nav" aria-label="Navegación principal">
           <a href="#inicio" data-nav="inicio">Inicio</a>
+          <a href="#podcasts" data-nav="podcasts">Podcasts</a>
+          <a href="#videos" data-nav="videos">Videos</a>
           <a href="#recursos" data-nav="recursos">Recursos</a>
           <a href="#ayuda" data-nav="ayuda">Preguntas frecuentes</a>
         </nav>
@@ -112,6 +132,56 @@
           <article class="resource-card resource-note"><span class="resource-icon">i</span><span class="section-kicker">IMPORTANTE</span><h2>Material oficial</h2><p>Los manuales, instructivos y videos oficiales deben consultarse en los canales institucionales vigentes. Este portal no aloja documentación oficial ni reemplaza las indicaciones del equipo SGE.</p><a href="#ayuda">Ver opciones de soporte <span>→</span></a></article>
         </div>
         <section class="quick-tips"><span class="section-kicker">ANTES DE EMPEZAR</span><h2>Tres ideas para aprovechar el recorrido</h2><div class="tips-grid"><p><b>01</b> Elegí el rol que corresponde a tus tareas.</p><p><b>02</b> Avanzá por los módulos en orden y revisá los conceptos.</p><p><b>03</b> Usá el simulador para practicar con datos ficticios.</p></div></section>
+      </section>
+
+      <section id="podcasts" class="view content-view section-shell" hidden>
+        <div class="content-intro"><a href="#inicio" class="back-link">← Volver al inicio</a><span class="section-kicker">ESCUCHÁ Y APRENDÉ</span><h1>Podcasts</h1><p>Cuatro episodios para escuchar cuando quieras. Podés reproducirlos desde acá o descargarlos para más tarde.</p></div>
+        <div class="podcast-grid">
+          <article class="podcast-card">
+            <span class="podcast-number">01</span><span class="podcast-icon" aria-hidden="true">♫</span>
+            <span class="section-kicker">PODCAST</span><h2>Carga de notas</h2>
+            <p>Un episodio sobre la carga de notas.</p>
+            <audio controls preload="none" aria-label="Escuchar el podcast Carga de notas"><source src="public/podscar_carga_notas_final.m4a" type="audio/mp4">Tu navegador no puede reproducir este audio. <a href="public/podscar_carga_notas_final.m4a">Descargalo acá</a>.</audio>
+            <a class="podcast-download" href="public/podscar_carga_notas_final.m4a" download>Descargar episodio <span aria-hidden="true">↓</span></a>
+          </article>
+          <article class="podcast-card">
+            <span class="podcast-number">02</span><span class="podcast-icon" aria-hidden="true">♫</span>
+            <span class="section-kicker">PODCAST</span><h2>Seguridad informática</h2>
+            <p>Un episodio sobre seguridad informática.</p>
+            <audio controls preload="none" aria-label="Escuchar el podcast Seguridad informática"><source src="public/podcast_seguridad_informatica.m4a" type="audio/mp4">Tu navegador no puede reproducir este audio. <a href="public/podcast_seguridad_informatica.m4a">Descargalo acá</a>.</audio>
+            <a class="podcast-download" href="public/podcast_seguridad_informatica.m4a" download>Descargar episodio <span aria-hidden="true">↓</span></a>
+          </article>
+          <article class="podcast-card">
+            <span class="podcast-number">03</span><span class="podcast-icon" aria-hidden="true">♫</span>
+            <span class="section-kicker">PODCAST</span><h2>Género</h2>
+            <p>Un episodio sobre género.</p>
+            <audio controls preload="none" aria-label="Escuchar el podcast Género"><source src="public/podcast_genero_final.m4a" type="audio/mp4">Tu navegador no puede reproducir este audio. <a href="public/podcast_genero_final.m4a">Descargalo acá</a>.</audio>
+            <a class="podcast-download" href="public/podcast_genero_final.m4a" download>Descargar episodio <span aria-hidden="true">↓</span></a>
+          </article>
+          <article class="podcast-card">
+            <span class="podcast-number">04</span><span class="podcast-icon" aria-hidden="true">♫</span>
+            <span class="section-kicker">PODCAST</span><h2>Sala de profes</h2>
+            <p>Un episodio para la sala de profes.</p>
+            <audio controls preload="none" aria-label="Escuchar el podcast Sala de profes"><source src="public/podcast_sala_de_profes.m4a" type="audio/mp4">Tu navegador no puede reproducir este audio. <a href="public/podcast_sala_de_profes.m4a">Descargalo acá</a>.</audio>
+            <a class="podcast-download" href="public/podcast_sala_de_profes.m4a" download>Descargar episodio <span aria-hidden="true">↓</span></a>
+          </article>
+        </div>
+      </section>
+
+      <section id="videos" class="view content-view section-shell" hidden>
+        <div class="content-intro"><a href="#inicio" class="back-link">← Volver al inicio</a><span class="section-kicker">MIRÁ Y APRENDÉ</span><h1>Videos</h1><p>Reproducí los videos de capacitación desde acá o descargalos para verlos más tarde.</p></div>
+        <div class="video-grid">
+          <article class="video-card">
+            <span class="video-number">01</span><span class="video-icon" aria-hidden="true">▶</span>
+            <span class="section-kicker">CAPACITACIÓN · NIVEL SUPERIOR</span><h2>Registrar calificaciones</h2>
+            <p>Video instructivo sobre el registro de calificaciones en el nivel superior.</p>
+            <video controls preload="none" playsinline aria-label="Video: Registrar calificaciones en el nivel superior">
+              <source src="public/408-REGISTRAR%20CALIFICACIONES_SUPERIOR.mp4" type="video/mp4">
+              Tu navegador no puede reproducir este video. <a href="public/408-REGISTRAR%20CALIFICACIONES_SUPERIOR.mp4">Descargalo acá</a>.
+            </video>
+            <a class="video-download" href="public/408-REGISTRAR%20CALIFICACIONES_SUPERIOR.mp4" download>Descargar video <span aria-hidden="true">↓</span></a>
+          </article>
+        </div>
       </section>
 
       <section id="ayuda" class="view content-view help-view section-shell" hidden>

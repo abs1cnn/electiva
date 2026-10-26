@@ -90,11 +90,21 @@ const views = {
   inicio: document.querySelector(".home-view"),
   role: document.querySelector("#role-view"),
   recursos: document.querySelector("#recursos"),
+  podcasts: document.querySelector("#podcasts"),
+  videos: document.querySelector("#videos"),
   ayuda: document.querySelector("#ayuda")
 };
 const searchInput = document.querySelector("#site-search");
 const searchResults = document.querySelector("#search-results");
+const textSizeValue = document.querySelector("#text-size-value");
+const narrationStart = document.querySelector("#narration-start");
+const narrationPause = document.querySelector("#narration-pause");
+const narrationResume = document.querySelector("#narration-resume");
+const narrationStop = document.querySelector("#narration-stop");
+const narrationStatus = document.querySelector("#narration-status");
 const storageKey = "sge-portal-demo-v1";
+let textScale = 1;
+let activeUtterance = null;
 const emptyState = () => ({
   completed: { profesor: [false, false, false], preceptor: [false, false, false], directivo: [false, false, false] },
   grades: [],
@@ -429,6 +439,7 @@ function renderFaq() {
 }
 
 function showView(viewName, roleKey = null) {
+  if (activeUtterance) stopNarration("Narración detenida al cambiar de sección.");
   Object.values(views).forEach((view) => { view.hidden = true; });
   if (viewName === "role" && !renderRole(roleKey)) viewName = "inicio";
   views[viewName].hidden = false;
@@ -447,7 +458,7 @@ function routeFromHash() {
   if (roles[route]) {
     showView("role", route);
     if (parts[1]) requestAnimationFrame(() => document.getElementById(parts[1])?.scrollIntoView({ behavior: "smooth" }));
-  } else if (route === "recursos" || route === "ayuda") showView(route);
+  } else if (route === "recursos" || route === "podcasts" || route === "videos" || route === "ayuda") showView(route);
   else showView("inicio");
 }
 
@@ -463,9 +474,110 @@ function buildSearchIndex() {
   });
   faqItems.forEach(([title, description]) => entries.push({ title, description, href: "#ayuda", category: "Preguntas frecuentes" }));
   entries.push({ title: "Centro de recursos", description: "Microguías de calificaciones, asistencia y tablero institucional.", href: "#recursos", category: "Recursos" });
+  entries.push(
+    { title: "Carga de notas", description: "Podcast sobre carga de notas.", href: "#podcasts", category: "Podcast" },
+    { title: "Seguridad informática", description: "Podcast sobre seguridad informática.", href: "#podcasts", category: "Podcast" },
+    { title: "Género", description: "Podcast sobre género.", href: "#podcasts", category: "Podcast" },
+    { title: "Sala de profes", description: "Podcast para la sala de profes.", href: "#podcasts", category: "Podcast" }
+  );
+  entries.push({
+    title: "Registrar calificaciones",
+    description: "Video instructivo sobre el registro de calificaciones en el nivel superior.",
+    href: "#videos",
+    category: "Video"
+  });
   return entries;
 }
 const searchIndex = buildSearchIndex();
+
+function setTextScale(scale) {
+  textScale = Math.max(0.8, Math.min(1.5, Number(scale.toFixed(1))));
+  document.documentElement.dataset.textScale = Math.round(textScale * 100);
+  document.documentElement.style.setProperty("--text-scale", textScale);
+  textSizeValue.textContent = `${Math.round(textScale * 100)}%`;
+  document.querySelector("#text-smaller").disabled = textScale <= 0.8;
+  document.querySelector("#text-larger").disabled = textScale >= 1.5;
+}
+
+function updateNarrationControls(isReading = false, isPaused = false) {
+  narrationStart.disabled = isReading || isPaused;
+  narrationPause.disabled = !isReading;
+  narrationResume.disabled = !isPaused;
+  narrationStop.disabled = !isReading && !isPaused;
+}
+
+function stopNarration(message = "Narración detenida.") {
+  window.speechSynthesis.cancel();
+  activeUtterance = null;
+  updateNarrationControls();
+  narrationStatus.textContent = message;
+}
+
+function readCurrentPage() {
+  const currentView = document.querySelector("main .view:not([hidden])");
+  if (!currentView) {
+    narrationStatus.textContent = "No hay contenido disponible para leer.";
+    return;
+  }
+
+  const content = currentView.cloneNode(true);
+  content.querySelectorAll("button, input, select, textarea, audio, iframe, dialog, .back-link, [aria-hidden='true'], [hidden], .sr-only")
+    .forEach((element) => element.remove());
+  content.querySelectorAll("details:not([open])").forEach((details) => {
+    Array.from(details.children)
+      .filter((element) => element.tagName !== "SUMMARY")
+      .forEach((element) => element.remove());
+  });
+  const text = content.textContent.replace(/\s+/g, " ").trim();
+  if (!text) {
+    narrationStatus.textContent = "No hay contenido disponible para leer.";
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "es-AR";
+  activeUtterance = utterance;
+  utterance.onstart = () => {
+    if (activeUtterance !== utterance) return;
+    updateNarrationControls(true);
+    narrationStatus.textContent = "Leyendo el contenido de esta página.";
+  };
+  utterance.onend = () => {
+    if (activeUtterance !== utterance) return;
+    activeUtterance = null;
+    updateNarrationControls();
+    narrationStatus.textContent = "Terminó la lectura de esta página.";
+  };
+  utterance.onerror = (event) => {
+    if (activeUtterance !== utterance) return;
+    activeUtterance = null;
+    updateNarrationControls();
+    narrationStatus.textContent = `No se pudo reproducir la narración: ${event.error}.`;
+  };
+  narrationStatus.textContent = "Preparando la narración.";
+  window.speechSynthesis.speak(utterance);
+}
+
+document.querySelector("#text-smaller").addEventListener("click", () => setTextScale(textScale - 0.1));
+document.querySelector("#text-larger").addEventListener("click", () => setTextScale(textScale + 0.1));
+document.querySelector("#text-reset").addEventListener("click", () => setTextScale(1));
+narrationStart.addEventListener("click", readCurrentPage);
+narrationPause.addEventListener("click", () => {
+  window.speechSynthesis.pause();
+  updateNarrationControls(false, true);
+  narrationStatus.textContent = "Narración pausada.";
+});
+narrationResume.addEventListener("click", () => {
+  window.speechSynthesis.resume();
+  updateNarrationControls(true);
+  narrationStatus.textContent = "Reanudando la narración.";
+});
+narrationStop.addEventListener("click", () => stopNarration());
+if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
+  narrationStart.disabled = true;
+  narrationStatus.textContent = "La narración no está disponible en este navegador. Podés usar el lector de pantalla de tu dispositivo.";
+}
 
 function runSearch() {
   const normalize = (text) => text.toLocaleLowerCase("es").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -508,6 +620,7 @@ document.querySelectorAll("[data-resource-role]").forEach((link) => link.addEven
   location.hash = link.getAttribute("href");
 }));
 window.addEventListener("hashchange", routeFromHash);
+setTextScale(textScale);
 renderFaq();
 renderHomeProgress();
 routeFromHash();
