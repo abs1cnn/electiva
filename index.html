@@ -3,15 +3,55 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#153d35">
+    <meta name="theme-color" content="#17483e">
     <meta name="description" content="Portal de capacitación para acompañar el uso de la Libreta Digital SGE en Córdoba.">
     <title>SGE · Libreta Digital | Portal de capacitación</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="app.js" defer></script>
+    <script src="content/roles.js" defer></script>
+    <script src="content/modules.js" defer></script>
+    <script src="content/practice.js" defer></script>
+    <script src="content/diagnostic.js" defer></script>
+    <script src="content/exam.js" defer></script>
+    <script src="content/transcripts.js" defer></script>
+    <script src="js/state.js" defer></script>
+    <script src="js/docs.js" defer></script>
+    <script src="js/a11y.js" defer></script>
+    <script src="js/quiz.js" defer></script>
+    <script src="js/sim-grades.js" defer></script>
+    <script src="js/sim-attendance.js" defer></script>
+    <script src="js/workspaces.js" defer></script>
+    <script src="js/diagnostic.js" defer></script>
+    <script src="js/portfolio.js" defer></script>
+    <script src="js/exam.js" defer></script>
+    <script src="js/router.js" defer></script>
+    <script src="js/help.js" defer></script>
+    <script src="js/main.js" defer></script>
   </head>
   <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5v-16Z"/><path d="M4 5.5v14A2.5 2.5 0 0 1 6.5 17H20M8 7h8M8 10h6"/></symbol>
+        <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M8 3v4m8-4v4M4 10h16m-11 4h2m3 0h2m-7 3h2"/></symbol>
+        <symbol id="i-building" viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-7h6v7M9 9h.01M15 9h.01"/></symbol>
+        <symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></symbol>
+        <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/></symbol>
+        <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/></symbol>
+        <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.7.4-1.1.9-1.1 1.8M12 17h.01"/></symbol>
+        <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+        <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+      </defs>
+    </svg>
     <a class="skip-link" href="#main-content">Ir al contenido principal</a>
     <section class="accessibility-bar" aria-label="Herramientas de accesibilidad">
+      <div class="accessibility-head accessibility-inner">
+        <button type="button" class="accessibility-toggle" id="accessibility-toggle" aria-expanded="false" aria-controls="accessibility-panel">
+          Accesibilidad
+          <svg class="accessibility-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <span id="narration-status" class="accessibility-status" role="status" aria-live="polite"></span>
+      </div>
+      <div id="accessibility-panel" class="accessibility-panel" hidden>
       <div class="accessibility-inner">
         <div class="text-size-controls" role="group" aria-label="Tamaño del texto">
           <span class="accessibility-label">Tamaño del texto</span>
@@ -21,12 +61,19 @@
           <span id="text-size-value" class="accessibility-status" aria-live="polite">100%</span>
         </div>
         <div class="narration-controls" role="group" aria-label="Narración del contenido">
-          <button type="button" class="accessibility-button" id="narration-start" aria-label="Leer el contenido de esta página">▶ Leer página</button>
+          <button type="button" class="accessibility-button" id="narration-start" aria-label="Leer el contenido de esta página" aria-keyshortcuts="Alt+T" title="Atajo: Alt+T">Leer página</button>
           <button type="button" class="accessibility-button" id="narration-pause" aria-label="Pausar la narración" disabled>Pausar</button>
           <button type="button" class="accessibility-button" id="narration-resume" aria-label="Reanudar la narración" disabled>Continuar</button>
-          <button type="button" class="accessibility-button" id="narration-stop" aria-label="Detener la narración" disabled>Detener</button>
+          <button type="button" class="accessibility-button" id="narration-stop" aria-label="Detener la narración" aria-keyshortcuts="Escape" disabled>Detener</button>
+          <button type="button" class="accessibility-button" id="narration-prev" aria-label="Párrafo anterior" aria-keyshortcuts="ArrowLeft" disabled><span aria-hidden="true">←</span> Anterior</button>
+          <button type="button" class="accessibility-button" id="narration-next" aria-label="Párrafo siguiente" aria-keyshortcuts="ArrowRight" disabled>Siguiente <span aria-hidden="true">→</span></button>
+          <button type="button" class="accessibility-button" id="narration-enter" aria-label="Entrar a la pantalla del párrafo actual" aria-keyshortcuts="Enter" disabled>Entrar <span aria-hidden="true">↵</span></button>
+          <span class="accessibility-label" aria-hidden="true">Volumen</span>
+          <button type="button" class="accessibility-button" id="volume-down" aria-label="Bajar el volumen de la voz">Vol −</button>
+          <button type="button" class="accessibility-button" id="volume-up" aria-label="Subir el volumen de la voz">Vol +</button>
+          <span id="volume-value" class="accessibility-status" aria-hidden="true">100%</span>
         </div>
-        <span id="narration-status" class="accessibility-status" role="status" aria-live="polite"></span>
+      </div>
       </div>
     </section>
     <header class="site-header">
@@ -38,163 +85,174 @@
         <nav class="main-nav" aria-label="Navegación principal">
           <a href="#inicio" data-nav="inicio">Inicio</a>
           <a href="#podcasts" data-nav="podcasts">Podcasts</a>
-          <a href="#videos" data-nav="videos">Videos</a>
           <a href="#recursos" data-nav="recursos">Recursos</a>
+          <a href="#portafolio" data-nav="portafolio">Mi portafolio</a>
           <a href="#ayuda" data-nav="ayuda">Preguntas frecuentes</a>
         </nav>
-        <a class="header-help" href="#ayuda"><span aria-hidden="true">?</span> Mesa de ayuda</a>
       </div>
     </header>
 
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
       <section id="inicio" class="view home-view">
         <div class="hero-wrap">
-          <div class="hero-copy">
-            <div class="eyebrow"><span class="eyebrow-dot"></span> ACOMPAÑAMIENTO PARA LA COMUNIDAD EDUCATIVA</div>
-            <h1>La escuela,<br>más <span>conectada.</span></h1>
+          <div class="hero-copy section-shell">
+            <h1>La escuela, más conectada.</h1>
             <p class="hero-lede">Todo lo que necesitás para trabajar con la Libreta Digital SGE, en un solo lugar y a tu ritmo.</p>
-            <a href="#rutas" class="button button-light">Explorar capacitaciones <span aria-hidden="true">↘</span></a>
-            <div class="hero-note"><span class="note-line"></span> Guías prácticas para cada rol en tu escuela</div>
-          </div>
-          <div class="hero-art" aria-hidden="true">
-            <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
-            <div class="art-card art-card-back"><span class="art-mini-label">SEGUIMIENTO ESCOLAR</span><div class="art-bars"><i></i><i></i><i></i><i></i><i></i></div><div class="art-foot"><span>Asistencia</span><b>94%</b></div></div>
-            <div class="art-card art-card-front"><div class="art-topline"><span class="art-dot"></span><span>INFORME DE PROGRESO</span><span class="art-more">···</span></div><div class="art-student"><span class="avatar">LM</span><span><b>Lucía Martínez</b><small>3.º año · División A</small></span><span class="status-pill">Al día</span></div><div class="art-progress"><span></span></div><div class="art-labels"><span>Trayectoria escolar</span><b>Buen progreso</b></div></div>
-            <div class="art-orbit orbit-three"></div><span class="art-spark spark-one">✳</span><span class="art-spark spark-two">✦</span>
+            <a href="#rutas" class="button button-light">Explorar capacitaciones <span aria-hidden="true">↓</span></a>
           </div>
         </div>
 
+        <div id="diagnostic-banner" class="section-shell diag-slot"></div>
+
         <section id="rutas" class="path-section section-shell">
           <div class="section-heading">
-            <div><span class="section-kicker">TU RECORRIDO EMPIEZA ACÁ</span><h2>Elegí tu ruta de aprendizaje</h2></div>
-            <span class="heading-aside">Contenido pensado para las tareas<br>de cada rol en la escuela.</span>
+            <h2>Elegí tu ruta de aprendizaje</h2>
+            <p class="heading-aside">Cada ruta se arma con las tareas de un perfil en la escuela.</p>
           </div>
           <div class="role-grid">
             <a href="#profesor" class="role-card role-profesor" data-role="profesor">
-              <span class="role-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5v-16Z"/><path d="M4 5.5v14A2.5 2.5 0 0 1 6.5 17H20M8 7h8M8 10h6"/></svg></span>
-              <span class="role-number">01 / DOCENCIA</span><h3>Profesor/a</h3><p>Registrá el progreso, las calificaciones y las trayectorias de tus estudiantes.</p><span class="role-link">Ver ruta <b aria-hidden="true">↗</b></span>
+              <span class="role-icon" aria-hidden="true"><svg class="icon"><use href="#i-book"/></svg></span>
+              <h3>Comunidad docente</h3><p>Registrá calificaciones, cerrá etapas y acompañá las trayectorias de tus estudiantes.</p><span class="role-link">Ver ruta <b aria-hidden="true">→</b></span>
             </a>
             <a href="#preceptor" class="role-card role-preceptor" data-role="preceptor">
-              <span class="role-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M8 3v4m8-4v4M4 10h16m-11 4h2m3 0h2m-7 3h2"/></svg></span>
-              <span class="role-number">02 / ACOMPAÑAMIENTO</span><h3>Preceptor/a</h3><p>Llevá el registro diario y acompañá la asistencia de cada estudiante.</p><span class="role-link">Ver ruta <b aria-hidden="true">↗</b></span>
+              <span class="role-icon" aria-hidden="true"><svg class="icon"><use href="#i-calendar"/></svg></span>
+              <h3>Personal de preceptoría</h3><p>Llevá el registro diario y acompañá la asistencia de cada estudiante.</p><span class="role-link">Ver ruta <b aria-hidden="true">→</b></span>
             </a>
             <a href="#directivo" class="role-card role-directivo" data-role="directivo">
-              <span class="role-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-7h6v7M9 9h.01M15 9h.01"/></svg></span>
-              <span class="role-number">03 / GESTIÓN INSTITUCIONAL</span><h3>Directivo/a</h3><p>Consultá el tablero, gestioná accesos y acompañá los procesos escolares.</p><span class="role-link">Ver ruta <b aria-hidden="true">↗</b></span>
+              <span class="role-icon" aria-hidden="true"><svg class="icon"><use href="#i-building"/></svg></span>
+              <h3>Equipo directivo</h3><p>Consultá el tablero, gestioná accesos y finalizá el IPE de cada curso.</p><span class="role-link">Ver ruta <b aria-hidden="true">→</b></span>
             </a>
           </div>
           <section class="learning-progress" aria-labelledby="learning-progress-title">
-            <div class="progress-copy"><span class="section-kicker">TU CAPACITACIÓN</span><h2 id="learning-progress-title">Tu avance, a tu ritmo</h2><p>El progreso queda guardado en este navegador.</p></div>
+            <div class="progress-copy"><h2 id="learning-progress-title">Tu avance, a tu ritmo</h2><p>El progreso queda guardado en este navegador.</p></div>
             <div id="home-progress-list" class="home-progress-list"></div>
           </section>
         </section>
 
         <section class="search-band" aria-labelledby="search-title">
           <div class="search-inner">
-            <div><span class="section-kicker">¿QUÉ ESTÁS BUSCANDO?</span><h2 id="search-title">Encontrá una respuesta rápido.</h2><p>Buscá un tema, una tarea o una palabra clave.</p></div>
+            <div><h2 id="search-title">Encontrá una respuesta rápido</h2><p>Buscá un tema, una tarea o una palabra clave.</p></div>
             <div class="search-control">
               <label class="sr-only" for="site-search">Buscar en el portal</label>
-              <span class="search-icon" aria-hidden="true">⌕</span>
-              <input id="site-search" type="search" placeholder="Ej.: Materias Previas, asistencia..." autocomplete="off">
-              <button id="search-button" type="button" aria-label="Buscar">Buscar <span aria-hidden="true">→</span></button>
+              <svg class="icon search-icon" aria-hidden="true"><use href="#i-search"/></svg>
+              <input id="site-search" type="search" placeholder="Ej.: promedio, asistencia…" autocomplete="off">
+              <button id="search-button" type="button">Buscar</button>
               <div id="search-results" class="search-results" role="status" aria-live="polite" hidden></div>
             </div>
           </div>
         </section>
 
-        <section class="news-section section-shell">
-          <div class="section-heading news-heading"><div><span class="section-kicker">PARA TENER EN CUENTA</span><h2>Novedades del portal</h2></div><span class="news-label"><span></span> INFORMACIÓN</span></div>
-          <article class="news-card"><div class="news-date"><span>ACTUALIZACIÓN</span><b>SGE</b></div><div class="news-body"><h3>Un espacio para aprender paso a paso</h3><p>Explorá los recorridos y practicá con los simuladores de ejemplo. Este material es orientativo: consultá los procedimientos vigentes de tu institución ante cualquier diferencia.</p></div><a href="#recursos" class="news-arrow" aria-label="Ir a recursos">↗</a></article>
+        <section class="news-section section-shell" aria-labelledby="news-title">
+          <article class="news-card">
+            <svg class="icon news-icon" aria-hidden="true"><use href="#i-info"/></svg>
+            <div class="news-body"><h2 id="news-title">Un espacio para aprender paso a paso</h2><p>Explorá los recorridos y practicá con los simuladores de ejemplo. Este material es orientativo: ante cualquier diferencia, consultá los procedimientos vigentes de tu institución.</p></div>
+            <a href="#recursos" class="news-link">Ir a recursos <span aria-hidden="true">→</span></a>
+          </article>
         </section>
       </section>
 
       <section id="role-view" class="view role-view" hidden>
-        <div class="role-banner"><div class="section-shell role-banner-inner"><a href="#inicio" class="back-link">← Volver al inicio</a><span id="role-banner-kicker" class="section-kicker"></span><h1 id="role-title"></h1><p id="role-intro"></p></div></div>
+        <div class="role-banner"><div class="section-shell role-banner-inner"><a href="#inicio" class="back-link">← Volver al inicio</a><h1 id="role-title"></h1><p id="role-intro"></p></div></div>
         <div class="section-shell role-content">
-          <div class="module-heading"><div><span class="section-kicker">TU RUTA DE APRENDIZAJE</span><h2>Módulos</h2></div><span class="module-count">3 MÓDULOS</span></div>
+          <div class="module-heading"><h2>Módulos</h2><span class="module-count">3 módulos</span></div>
           <div class="role-progress" id="role-progress"></div>
           <div id="module-list" class="module-list"></div>
-          <section id="workspace-section" class="workspace-section"></section>
-          <section class="simulator-section" id="simulador">
-            <div class="simulator-heading"><div><span class="section-kicker">PRACTICÁ CON UN CASO DE EJEMPLO</span><h2 id="simulator-title">Simulador</h2><p id="simulator-description"></p></div><span class="simulator-badge"><span></span> ENTORNO DE PRÁCTICA</span></div>
-            <div id="simulator-content" class="simulator-card"></div>
-            <p class="simulator-disclaimer">Este simulador es ilustrativo y no se conecta al sistema SGE. Los registros creados en las áreas de práctica se guardan solo en este navegador y no representan información real.</p>
-          </section>
+          <div id="exam-card"></div>
+          <section id="workspace-section" class="workspace-section"><span id="simulador" tabindex="-1"></span></section>
         </div>
+      </section>
+
+      <section id="module-view" class="view module-view" hidden>
+        <div class="role-banner"><div class="section-shell role-banner-inner"><a id="module-back" class="back-link" href="#inicio">← Volver</a><p class="module-position" id="module-position"></p><h1 id="module-title"></h1><p id="module-summary"></p><span id="module-status" class="status-badge"></span></div></div>
+        <div class="section-shell module-content">
+          <nav class="module-steps" aria-label="Pasos del módulo">
+            <button type="button" class="step-link" data-scroll="lesson-start"><span aria-hidden="true">1</span> Lección</button>
+            <button type="button" class="step-link" data-scroll="resources-start"><span aria-hidden="true">2</span> Recursos</button>
+            <button type="button" class="step-link" data-scroll="check-start"><span aria-hidden="true">3</span> Chequeo</button>
+            <button type="button" class="step-link" data-scroll="practice-start"><span aria-hidden="true">4</span> Práctica</button>
+          </nav>
+          <section class="module-section" aria-labelledby="lesson-start"><h2 id="lesson-start" tabindex="-1">Lección</h2><ol class="lesson-steps" id="lesson-steps"></ol></section>
+          <section class="module-section" aria-labelledby="resources-start"><h2 id="resources-start" tabindex="-1">Recursos para profundizar</h2><div id="module-resources" class="module-resources"></div></section>
+          <section class="module-section" aria-labelledby="check-start"><h2 id="check-start" tabindex="-1">Chequeo</h2><div id="module-quiz" class="quiz"></div></section>
+          <section class="module-section" aria-labelledby="practice-start"><h2 id="practice-start" tabindex="-1">Práctica</h2><div id="module-practice" class="module-practice"></div></section>
+          <nav class="module-nav" id="module-nav" aria-label="Seguir con la ruta"></nav>
+        </div>
+      </section>
+
+      <section id="diagnostico" class="view content-view section-shell" hidden>
+        <div class="content-intro"><a href="#inicio" class="back-link">← Volver al inicio</a><h1>Diagnóstico de entrada</h1><p>Sin nota: sirve para sugerirte por dónde empezar. Tus respuestas se guardan solo en este navegador y no se envían a ningún lugar.</p></div>
+        <div id="diagnostic-body" class="diag-body"></div>
+      </section>
+
+      <section id="portafolio" class="view content-view section-shell" hidden>
+        <div class="content-intro"><a href="#inicio" class="back-link">← Volver al inicio</a><h1>Mi portafolio</h1><p>Acá se junta tu recorrido: de dónde partiste, qué completaste y qué te conviene repasar.</p></div>
+        <div id="portfolio-body" class="portfolio-body"></div>
+      </section>
+
+      <section id="exam-view" class="view module-view" hidden>
+        <div class="role-banner"><div class="section-shell role-banner-inner"><a id="exam-back" class="back-link" href="#inicio">← Volver</a><p class="module-position">Evaluación final</p><h1 id="exam-title"></h1><p id="exam-summary"></p></div></div>
+        <div class="section-shell module-content"><div id="exam-body" class="exam-body"></div></div>
       </section>
 
       <section id="recursos" class="view content-view section-shell" hidden>
-        <div class="content-intro"><a href="#inicio" class="back-link">← Volver al inicio</a><span class="section-kicker">MATERIAL DE CONSULTA</span><h1>Centro de recursos</h1><p>Microguías y recursos de referencia para acompañar las tareas habituales en la Libreta Digital.</p></div>
+        <div class="content-intro"><a href="#inicio" class="back-link">← Volver al inicio</a><h1>Centro de recursos</h1><p>Instructivos y microguías de referencia para acompañar las tareas habituales en la Libreta Digital.</p></div>
         <div class="resource-grid">
-          <article class="resource-card"><span class="resource-number">01</span><span class="resource-icon">↗</span><span class="section-kicker">PROFESORADO</span><h2>Registro de calificaciones</h2><p>Repasá la secuencia de carga, revisión y cierre de calificaciones en el recorrido para Profesor/a.</p><a href="#profesor#modulo-1" data-resource-role="profesor">Abrir microguía <span>→</span></a><div class="doc-list" data-docs="calificaciones ipe"></div></article>
-          <article class="resource-card"><span class="resource-number">02</span><span class="resource-icon">◷</span><span class="section-kicker">PRECEPTORÍA</span><h2>Asistencia y justificaciones</h2><p>Consultá conceptos clave para el registro diario y el seguimiento de inasistencias.</p><a href="#preceptor#modulo-1" data-resource-role="preceptor">Abrir microguía <span>→</span></a><div class="doc-list" data-docs="asistencias"></div></article>
-          <article class="resource-card"><span class="resource-number">03</span><span class="resource-icon">▦</span><span class="section-kicker">EQUIPO DIRECTIVO</span><h2>Tablero institucional</h2><p>Conocé los temas del tablero de control, la gestión de accesos y el seguimiento de actas.</p><a href="#directivo#modulo-1" data-resource-role="directivo">Abrir microguía <span>→</span></a></article>
-          <article class="resource-card resource-note"><span class="resource-icon">i</span><span class="section-kicker">IMPORTANTE</span><h2>Material oficial</h2><p>Los manuales, instructivos y videos oficiales deben consultarse en los canales institucionales vigentes. Este portal no aloja documentación oficial ni reemplaza las indicaciones del equipo SGE.</p><a href="#ayuda">Ver opciones de soporte <span>→</span></a></article>
+          <article class="resource-card"><span class="resource-icon" aria-hidden="true"><svg class="icon"><use href="#i-book"/></svg></span><h2>Registro de calificaciones</h2><p>Repasá la carga de notas parciales, el cálculo de promedios y los estados de cada estudiante, en la ruta de la comunidad docente.</p><a href="#profesor#modulo-1" data-resource-role="profesor">Abrir la ruta <span aria-hidden="true">→</span></a><div class="doc-list" data-docs="calificaciones"></div></article>
+          <article class="resource-card"><span class="resource-icon" aria-hidden="true"><svg class="icon"><use href="#i-calendar"/></svg></span><h2>Asistencia</h2><p>Consultá cómo se registra la asistencia diaria y qué significa cada condición.</p><a href="#preceptor#modulo-1" data-resource-role="preceptor">Abrir la ruta <span aria-hidden="true">→</span></a><div class="doc-list" data-docs="asistencias"></div></article>
+          <article class="resource-card"><span class="resource-icon" aria-hidden="true"><svg class="icon"><use href="#i-building"/></svg></span><h2>Finalizar el IPE</h2><p>Conocé los requisitos para finalizar el Informe de Progreso Escolar y cómo hacerlo, en la ruta del equipo directivo.</p><a href="#directivo#modulo-1" data-resource-role="directivo">Abrir la ruta <span aria-hidden="true">→</span></a><div class="doc-list" data-docs="ipe"></div></article>
+          <article class="resource-card resource-note"><span class="resource-icon" aria-hidden="true"><svg class="icon"><use href="#i-info"/></svg></span><h2>Sobre estos instructivos</h2><p>Son materiales del Ministerio de Educación de Córdoba para el uso del SGE y se muestran con su autoría. Este portal no es un sitio oficial ni reemplaza al sistema: para la versión vigente consultá <a class="inline-link" href="https://www.cba.gov.ar/gestion-estudiantes" target="_blank" rel="noopener">cba.gov.ar/gestion-estudiantes<span class="sr-only"> (se abre en otra pestaña)</span></a>.</p></article>
         </div>
-        <section class="quick-tips"><span class="section-kicker">ANTES DE EMPEZAR</span><h2>Tres ideas para aprovechar el recorrido</h2><div class="tips-grid"><p><b>01</b> Elegí el rol que corresponde a tus tareas.</p><p><b>02</b> Avanzá por los módulos en orden y revisá los conceptos.</p><p><b>03</b> Usá el simulador para practicar con datos ficticios.</p></div></section>
+        <section class="quick-tips" aria-labelledby="tips-title"><h2 id="tips-title">Tres ideas para aprovechar el recorrido</h2><ol class="tips-grid"><li>Elegí el perfil que corresponde a tus tareas.</li><li>Avanzá por los módulos en orden y revisá los conceptos.</li><li>Usá el simulador para practicar con datos ficticios.</li></ol></section>
       </section>
 
       <section id="podcasts" class="view content-view section-shell" hidden>
-        <div class="content-intro"><a href="#inicio" class="back-link">← Volver al inicio</a><span class="section-kicker">ESCUCHÁ Y APRENDÉ</span><h1>Podcasts</h1><p>Cuatro episodios para escuchar cuando quieras. Podés reproducirlos desde acá o descargarlos para más tarde.</p></div>
-        <div class="podcast-grid">
-          <article class="podcast-card">
-            <span class="podcast-number">01</span><span class="podcast-icon" aria-hidden="true">♫</span>
-            <span class="section-kicker">PODCAST</span><h2>Carga de notas</h2>
-            <p>Un episodio sobre la carga de notas.</p>
-            <audio controls preload="none" aria-label="Escuchar el podcast Carga de notas"><source src="public/podscar_carga_notas_final.m4a" type="audio/mp4">Tu navegador no puede reproducir este audio. <a href="public/podscar_carga_notas_final.m4a">Descargalo acá</a>.</audio>
-            <a class="podcast-download" href="public/podscar_carga_notas_final.m4a" download>Descargar episodio <span aria-hidden="true">↓</span></a>
-          </article>
-          <article class="podcast-card">
-            <span class="podcast-number">02</span><span class="podcast-icon" aria-hidden="true">♫</span>
-            <span class="section-kicker">PODCAST</span><h2>Seguridad informática</h2>
-            <p>Un episodio sobre seguridad informática.</p>
-            <audio controls preload="none" aria-label="Escuchar el podcast Seguridad informática"><source src="public/podcast_seguridad_informatica.m4a" type="audio/mp4">Tu navegador no puede reproducir este audio. <a href="public/podcast_seguridad_informatica.m4a">Descargalo acá</a>.</audio>
-            <a class="podcast-download" href="public/podcast_seguridad_informatica.m4a" download>Descargar episodio <span aria-hidden="true">↓</span></a>
-          </article>
-          <article class="podcast-card">
-            <span class="podcast-number">03</span><span class="podcast-icon" aria-hidden="true">♫</span>
-            <span class="section-kicker">PODCAST</span><h2>Género</h2>
-            <p>Un episodio sobre género.</p>
-            <audio controls preload="none" aria-label="Escuchar el podcast Género"><source src="public/podcast_genero_final.m4a" type="audio/mp4">Tu navegador no puede reproducir este audio. <a href="public/podcast_genero_final.m4a">Descargalo acá</a>.</audio>
-            <a class="podcast-download" href="public/podcast_genero_final.m4a" download>Descargar episodio <span aria-hidden="true">↓</span></a>
-          </article>
-          <article class="podcast-card">
-            <span class="podcast-number">04</span><span class="podcast-icon" aria-hidden="true">♫</span>
-            <span class="section-kicker">PODCAST</span><h2>Sala de profes</h2>
-            <p>Un episodio para la sala de profes.</p>
-            <audio controls preload="none" aria-label="Escuchar el podcast Sala de profes"><source src="public/podcast_sala_de_profes.m4a" type="audio/mp4">Tu navegador no puede reproducir este audio. <a href="public/podcast_sala_de_profes.m4a">Descargalo acá</a>.</audio>
-            <a class="podcast-download" href="public/podcast_sala_de_profes.m4a" download>Descargar episodio <span aria-hidden="true">↓</span></a>
-          </article>
-        </div>
+        <div class="content-intro"><a href="#inicio" class="back-link">← Volver al inicio</a><h1>Podcasts</h1><p>Cuatro episodios para escuchar cuando quieras. Podés reproducirlos desde acá o descargarlos para más tarde.</p></div>
+        <div id="podcast-grid" class="podcast-grid"></div>
       </section>
 
       <section id="videos" class="view content-view section-shell" hidden>
-        <div class="content-intro"><a href="#inicio" class="back-link">← Volver al inicio</a><span class="section-kicker">MIRÁ Y APRENDÉ</span><h1>Videos</h1><p>Reproducí los videos de capacitación desde acá o descargalos para verlos más tarde.</p></div>
-        <div class="video-grid">
-          <article class="video-card">
-            <span class="video-number">01</span><span class="video-icon" aria-hidden="true">▶</span>
-            <span class="section-kicker">CAPACITACIÓN · NIVEL SUPERIOR</span><h2>Registrar calificaciones</h2>
-            <p>Video instructivo sobre el registro de calificaciones en el nivel superior.</p>
-            <video controls preload="none" playsinline aria-label="Video: Registrar calificaciones en el nivel superior">
-              <source src="public/408-REGISTRAR%20CALIFICACIONES_SUPERIOR.mp4" type="video/mp4">
-              Tu navegador no puede reproducir este video. <a href="public/408-REGISTRAR%20CALIFICACIONES_SUPERIOR.mp4">Descargalo acá</a>.
-            </video>
-            <a class="video-download" href="public/408-REGISTRAR%20CALIFICACIONES_SUPERIOR.mp4" download>Descargar video <span aria-hidden="true">↓</span></a>
-          </article>
-        </div>
+        <div class="content-intro"><a href="#inicio" class="back-link">← Volver al inicio</a><h1>Videos</h1><p>Estamos preparando videos breves para el nivel secundario. Mientras tanto, podés recorrer las rutas y escuchar los podcasts.</p></div>
+        <a href="#podcasts" class="button button-dark">Ir a los podcasts <span aria-hidden="true">→</span></a>
       </section>
 
       <section id="ayuda" class="view content-view help-view section-shell" hidden>
-        <div class="content-intro"><a href="#inicio" class="back-link">← Volver al inicio</a><span class="section-kicker">ESTAMOS PARA ACOMPAÑARTE</span><h1>Preguntas frecuentes</h1><p>Respuestas orientativas para comenzar. Si tu consulta depende del acceso o la configuración institucional, contactá a los referentes correspondientes.</p></div>
+        <div class="content-intro"><a href="#inicio" class="back-link">← Volver al inicio</a><h1>Preguntas frecuentes</h1><p>Respuestas orientativas para comenzar. Si tu consulta depende del acceso o de la configuración institucional, contactá a los referentes correspondientes.</p></div>
         <div id="faq-list" class="faq-list"></div>
-        <section class="support-card"><div class="support-icon">?</div><div><span class="section-kicker">¿NECESITÁS MÁS AYUDA?</span><h2>Contactá a tu referente institucional</h2><p>Para inconvenientes de acceso o consultas sobre el uso real del sistema, recurrí al referente SGE de tu institución o a los canales oficiales de soporte de la autoridad educativa.</p></div><a href="#inicio" class="button button-dark">Volver al portal <span>→</span></a></section>
+        <section class="support-card"><svg class="icon support-icon" aria-hidden="true"><use href="#i-help"/></svg><div><h2>Contactá a tu referente institucional</h2><p>Para inconvenientes de acceso o consultas sobre el uso real del sistema, recurrí al referente SGE de tu institución o a los canales oficiales de soporte de la autoridad educativa.</p></div><a href="#inicio" class="button button-dark">Volver al portal <span aria-hidden="true">→</span></a></section>
       </section>
     </main>
+
     <dialog id="doc-viewer" class="doc-viewer" aria-labelledby="doc-viewer-title">
-      <div class="doc-viewer-bar"><div><span class="section-kicker">VISTA PREVIA</span><h2 id="doc-viewer-title"></h2></div><div class="doc-viewer-actions"><a id="doc-viewer-download" class="doc-button doc-button-primary" download>Descargar ↓</a><button type="button" class="doc-button" id="doc-viewer-close" aria-label="Cerrar vista previa">Cerrar ✕</button></div></div>
+      <div class="doc-viewer-bar"><div><h2 id="doc-viewer-title"></h2><p id="doc-viewer-source" class="doc-viewer-source"></p></div><div class="doc-viewer-actions"><a id="doc-viewer-download" class="doc-button doc-button-primary" download>Descargar ↓</a><button type="button" class="doc-button" id="doc-viewer-close" aria-label="Cerrar vista previa">Cerrar</button></div></div>
       <iframe id="doc-viewer-frame" title="Vista previa del documento"></iframe>
     </dialog>
-    <div id="site-notice"class="site-notice" role="status" aria-live="polite" hidden></div>
+
+    <button type="button" class="help-fab" id="help-toggle" aria-expanded="false" aria-controls="help-panel"><svg class="icon" aria-hidden="true"><use href="#i-help"/></svg><span>Ayuda</span></button>
+    <section id="help-panel" class="help-panel" aria-labelledby="help-title" hidden>
+      <div class="help-head"><h2 id="help-title">¿Necesitás ayuda?</h2><button type="button" class="help-close" id="help-close" aria-label="Cerrar la ayuda"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+      <ul class="help-links">
+        <li><a href="#ayuda">Preguntas frecuentes</a></li>
+        <li><a href="#recursos">Instructivos y guías</a></li>
+        <li><a href="#portafolio">Mi portafolio</a></li>
+        <li><a href="https://www.cba.gov.ar/gestion-estudiantes" target="_blank" rel="noopener">Formulario de consultas del SGE<span class="sr-only"> (se abre en otra pestaña)</span></a></li>
+      </ul>
+      <p class="help-note">Si no podés ingresar a la Libreta Digital, escribile al referente SGE de tu institución. No compartas contraseñas por canales no verificados.</p>
+      <div class="help-data">
+        <h3>Mis datos en este navegador</h3>
+        <p>Tu avance y tus prácticas se guardan solo acá. Si borrás los datos del navegador, se pierden.</p>
+        <div class="help-data-actions"><button type="button" class="secondary-button" id="data-export">Descargar mi avance</button><label class="secondary-button file-button" for="data-import">Importar un avance<input id="data-import" type="file" accept="application/json,.json" class="sr-only"></label><button type="button" class="secondary-button" id="data-reset">Borrar mis datos</button></div>
+      </div>
+    </section>
+    <dialog id="sim-dialog" class="sim-dialog" aria-labelledby="sim-dialog-title">
+      <form method="dialog">
+        <h2 id="sim-dialog-title"></h2>
+        <div id="sim-dialog-body"></div>
+        <div class="field" id="sim-dialog-field" hidden><label for="sim-dialog-input" id="sim-dialog-label"></label><input id="sim-dialog-input" type="text" maxlength="40" autocomplete="off"></div>
+        <div class="sim-dialog-actions"><button type="submit" value="cancel" class="secondary-button" formnovalidate>Cancelar</button><button type="submit" value="ok" class="simulator-submit" id="sim-dialog-ok">Confirmar</button></div>
+      </form>
+    </dialog>
+    <div id="print-area" class="print-area" aria-hidden="true"></div>
+    <div id="site-notice" class="site-notice" role="status" aria-live="polite" hidden></div>
     <footer class="site-footer"><div class="section-shell footer-inner"><a class="brand footer-brand" href="#inicio"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span class="brand-copy"><strong>SGE</strong><small>Libreta Digital</small></span></a><p>Un espacio de acompañamiento para la comunidad educativa.</p><span class="footer-disclaimer">Material orientativo · Córdoba</span></div></footer>
   </body>
 </html>
